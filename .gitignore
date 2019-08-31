@@ -1,5 +1,9 @@
 # Mac OS
 **/.DS_Store
 /*.env
-/setting.yml
+/*.yml
 **/db.yml
+*.side
+/logs
+/screenshots
+**_*
