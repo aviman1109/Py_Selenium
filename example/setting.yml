@@ -6,3 +6,5 @@ Setting:
   password: csiicsii
   file: file.side
   log: INFO
+  thread: 2
+  loop: 3

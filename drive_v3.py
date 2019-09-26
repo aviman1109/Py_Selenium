@@ -5,10 +5,8 @@ import time
 import sys
 import codecs
 import traceback
-import argparse
-import datetime
 import logging
-import yaml
+
 
 from selenium import webdriver
 from datetime import datetime
@@ -18,7 +16,6 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
 from SQLConnectionMod import SQLConnection
-from dotenv import load_dotenv
 
 
 def mkdir_func(dname):
@@ -28,16 +25,13 @@ def mkdir_func(dname):
         os.mkdir(dname)
 
 
-
 class Test():
     def __init__(self, setting):
+        # mkdir_func('logs')
+        # mkdir_func('screenshots')
+        settings = ['host', 'user', 'password', 'database', 'port']
 
-        mkdir_func('logs')
-        mkdir_func('screenshots')
-        # self.logger(setting['log'])
-        settings = ['host','user','password','database','port']
-
-        if all (k in setting for k in settings):
+        if all(k in setting for k in settings):
             try:
                 SQLconnect = SQLConnection()
                 self.DataBase = SQLconnect.Crawler_MySQL(setting)
@@ -48,7 +42,11 @@ class Test():
             else:
                 self.DataBase.initTable()
         else:
+            self.DataBase = None
             logging.info('You might need a mariaDB!!')
+
+
+        print(setting)
         if setting['browser'] == 'Chrome':
             chrome_options = webdriver.ChromeOptions()
             chrome_options.add_argument('--no-sandbox')
@@ -58,10 +56,7 @@ class Test():
             self.URL = ""
         else:
             pass
-
-        # self.DRIVE.maximize_window()
         self.DRIVE.set_window_size(1440, 900)
-
 
     def infoLogger_func(self, logger, command, startTime):
         logger.info('command '+command['command'])
@@ -72,6 +67,7 @@ class Test():
         insert = (
             self.ID,
             datetime.now(),
+            self.comment,
             self.command,
             self.target,
             str(self.targets),
@@ -84,9 +80,8 @@ class Test():
             self.testName,
             str(timecost)
         )
-        if self.DataBase  !=  None:
+        if self.DataBase != None:
             self.DataBase.insertResult(insert)
-
 
     def teardown_method(self):
         self.DRIVE.quit()
@@ -111,6 +106,7 @@ class Test():
                 self.ID = command['id']
                 # self.name=command['name']
                 self.command = command['command']
+                self.comment = command['comment']
                 self.target = command['target']
                 self.targets = command['targets']
                 self.value = command['value']

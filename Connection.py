@@ -61,8 +61,8 @@ class MySQL(SqlSetting):
         self.execute("""SET NAMES UTF8;""")
 
     def insertResult(self, command):
-        sqlinsert = ("INSERT INTO commands(ID ,datetime,command ,target ,targets ,value ,projectID ,projectVersion ,projectName ,projectURL ,testID ,testName ,timecost)" +
-                     "VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)")
+        sqlinsert = ("INSERT INTO commands(ID ,datetime , comment,command ,target ,targets ,value ,projectID ,projectVersion ,projectName ,projectURL ,testID ,testName ,timecost)" +
+                     "VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)")
         if command:
             # print (sqlinsert)
             # print (command)
