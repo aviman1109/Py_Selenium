@@ -65,7 +65,7 @@ class pySelenium():
         logging.info("start process")
         # self.runner = drive_v3.Test(self.setting)
         for k in range(self.setting['loop']):
-            logging.info("start %i loop", k)
+            logging.info("start loop %i", k+1)
             # 建立 N 個子執行緒
             threads = []
             for i in range(self.setting['thread']):
@@ -76,7 +76,7 @@ class pySelenium():
                 self.thread_job()
             for i in range(self.setting['thread']):
                 threads[i].join()
-            logging.info("Finished %i loop", k)
+            logging.info("Finished loop %i ", k+1)
         logging.info("Finished process")
 
     def thread_job(self):
