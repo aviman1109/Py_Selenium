@@ -83,7 +83,7 @@ class pySelenium():
         runner = drive_v3.Test(self.setting)
         runner.read_json(self.setting['file'])
         # logging.info('finished')
-        # runner.teardown_method()
+        runner.teardown_method()
 
     def loadSetting(self, settingDict):
         settings = ['file']
