@@ -13,7 +13,7 @@ steps:
   image: python:3.7.4
   commands:
     - pip install -r requirements.txt
-    - pyinstaller -F main.py -n pySelenium_linux
+    - pyinstaller -F main.py -n pySelenium
 
 # - name: pack_init
 #   image: cdrx/pyinstaller-linux:python3
@@ -21,9 +21,9 @@ steps:
 #   commands:
 #     - pyinstaller main.py
 
-- name: pack_linux
-  image: cdrx/pyinstaller-linux:python3
-  pull: always
+# - name: pack_linux
+#   image: cdrx/pyinstaller-linux:python3
+#   pull: always
 
 - name: pack_windows
   image: cdrx/pyinstaller-windows:python3

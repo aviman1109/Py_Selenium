@@ -61,7 +61,7 @@ class Test():
             self.URL = ""
         if 'IE' in setting['browser']:
             IE_options = webdriver.IeOptions()
-            IE_options.add_argument('--no-sandbox')
+            # IE_options.add_argument('--no-sandbox')
             if setting['driver']:
                 self.DRIVE = webdriver.Ie(ie_options=IE_options,executable_path=setting['driver'])
             else:

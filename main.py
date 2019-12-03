@@ -88,7 +88,7 @@ class pySelenium():
     def loadSetting(self, settingDict):
         settings = ['file']
         options = ['host', 'user', 'password', 'database',
-                   'loop', 'thread', 'delay', 'port', 'log', 'browser']
+                   'loop', 'thread', 'delay', 'port', 'log', 'browser' , 'display']
         if not all(k in settingDict for k in settings):
             self.exampleSetting()
         if any(k in settingDict for k in options):
@@ -106,6 +106,8 @@ class pySelenium():
                         settingDict['log'] = 'INFO'
                     elif k == 'browser':
                         settingDict['browser'] = 'Chrome'
+                    elif k == 'display':
+                        settingDict['display'] = True
                         pass
         return settingDict
 
