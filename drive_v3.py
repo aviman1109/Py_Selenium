@@ -203,7 +203,7 @@ class Test():
 
         elif command == "returnWindow":
             try:
-                self.DRIVE.close()
+                # self.DRIVE.close()
                 return self.DRIVE.switch_to.window(self.driver.window_handles[0])
             except:
                 pass
