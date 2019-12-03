@@ -147,7 +147,10 @@ class Test():
         value = _json["value"]
         execlogger = logging.getLogger('UiTester.exec')
 
-        if command == "open":
+        if "//" in command:
+            return "pass"
+
+        elif command == "open":
             if "http" in target:
                 self.DRIVE.get(target)
             else:
