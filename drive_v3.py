@@ -179,6 +179,13 @@ class Test():
                 WebDriverWait(self.DRIVE, 10).until(
                     EC.frame_to_be_available_and_switch_to_it(target), self.DRIVE)
 
+        elif command == "verifyElementPresent":
+            target = target.split("=")[-1]
+            try:
+                return self.DRIVE.find_element_by_xpath(target)
+            except:
+                pass
+
         elif command == "pause":
             time.sleep(int(value))
 
