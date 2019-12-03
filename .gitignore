@@ -13,3 +13,4 @@
 /dist
 *.code-workspace
 *.spec
+*test*

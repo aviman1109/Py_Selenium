@@ -37,7 +37,8 @@ class Test():
                 self.DataBase = SQLconnect.Crawler_MySQL(setting)
                 logging.info('DB Connected.')
             except Exception:
-                logging.info('Connection failed.')
+                logging.error('Connection failed.')
+                logging.error(traceback.print_exc())
                 self.DataBase = None
             else:
                 self.DataBase.initTable()
@@ -45,7 +46,6 @@ class Test():
         else:
             self.DataBase = None
             logging.info('You might need a mariaDB!!')
-
 
         logging.info(setting)
         if 'Chrome' in setting['browser']:
@@ -55,7 +55,8 @@ class Test():
                 chrome_options.add_argument('--headless')
                 chrome_options.add_argument('--disable-gpu')
             if setting['driver']:
-                self.DRIVE = webdriver.Chrome(chrome_options=chrome_options,executable_path=setting['driver'])
+                self.DRIVE = webdriver.Chrome(
+                    chrome_options=chrome_options, executable_path=setting['driver'])
             else:
                 self.DRIVE = webdriver.Chrome(chrome_options=chrome_options)
             self.URL = ""
@@ -63,7 +64,8 @@ class Test():
             IE_options = webdriver.IeOptions()
             # IE_options.add_argument('--no-sandbox')
             if setting['driver']:
-                self.DRIVE = webdriver.Ie(ie_options=IE_options,executable_path=setting['driver'])
+                self.DRIVE = webdriver.Ie(
+                    ie_options=IE_options, executable_path=setting['driver'])
             else:
                 self.DRIVE = webdriver.Ie(ie_options=IE_options)
             self.URL = ""
@@ -71,10 +73,12 @@ class Test():
             pass
         self.DRIVE.set_window_size(1440, 900)
 
-    def infoLogger_func(self, logger, command, startTime):
+    def infoLogger_func(self, logger, command, startTime, result):
         logger.info('command '+command['command'])
         logger.info('id '+command['id'])
         logger.info('target '+command['target'])
+        logger.info('value '+command['value'])
+        logger.info('result '+str(result))
         timecost = datetime.now()-startTime
         logger.info('time cost' + str(timecost))
         insert = (
@@ -128,8 +132,9 @@ class Test():
                         "screenshots/%Y%m%d_%H%M%S.%f.png"))
                 startTime = datetime.now()
                 try:
-                    self.extract_json(command)
-                    self.infoLogger_func(readlogger, command, startTime)
+                    result = self.extract_json(command)
+                    self.infoLogger_func(
+                        readlogger, command, startTime, result)
                 except:
                     readlogger.error('command '+command['command'])
                     readlogger.error('id '+command['id'])
@@ -177,17 +182,22 @@ class Test():
                 try:
                     target = int(target)
                 except:
-                    pass
+                    return traceback.format_exc()
                 execlogger.debug(target)
                 WebDriverWait(self.DRIVE, 10).until(
                     EC.frame_to_be_available_and_switch_to_it(target), self.DRIVE)
 
         elif command == "verifyElementPresent":
-            target = target.split("=")[-1]
+            target = target.split("path=")[-1]
+            print(target)
             try:
+                WebDriverWait(self.DRIVE, 10).until(
+                    EC.presence_of_element_located((By.XPATH, target)))
+                # WebDriverWait(self.DRIVE,10 ,0.1).until(
+                #     EC.presence_of_element_located((By.XPATH, target)))
                 return self.DRIVE.find_element_by_xpath(target)
             except:
-                pass
+                return traceback.format_exc()
 
         elif command == "pause":
             time.sleep(int(value))
@@ -196,25 +206,41 @@ class Test():
             try:
                 return self.DRIVE.close()
             except:
-                pass
+                return traceback.format_exc()
 
         elif command == "executeScript":
             try:
                 return self.DRIVE.execute_script(value)
             except:
-                pass
+                return traceback.format_exc()
+
+        elif command == "executeSwich":
+            print("qqqqqqq")
+            print(self.DRIVE.window_handles)
+            try:
+                self.main_window = self.DRIVE.current_window_handle()
+                self.DRIVE.execute_script(
+                    "window.open('http://www.twitter.com', 'new window')")
+                window_after = self.DRIVE.window_handles[1]
+                self.DRIVE.switch_to.window(window_after)
+                time.sleep(10)
+                self.DRIVE.get("https://www.google.com")
+                self.DRIVE.switch_to.window(window_after)
+            except:
+                return traceback.format_exc()
 
         elif command == "swichWindow":
             try:
-                return self.DRIVE.switch_to.window(self.driver.window_handles[int(value)])
+                self.main_window = self.DRIVE.current_window_handle
+                return self.DRIVE.switch_to.window(self.DRIVE.window_handles[int(value)])
             except:
-                pass
+                return traceback.format_exc()
 
         elif command == "returnWindow":
             try:
-                return self.DRIVE.switch_to.window(self.driver.window_handles[0])
+                return self.DRIVE.switch_to.window(self.main_window)
             except:
-                pass
+                return traceback.format_exc()
 
         else:
             if targets:

@@ -83,12 +83,12 @@ class pySelenium():
         runner = drive_v3.Test(self.setting)
         runner.read_json(self.setting['file'])
         # logging.info('finished')
-        runner.teardown_method()
+        # runner.teardown_method()
 
     def loadSetting(self, settingDict):
         settings = ['file']
         options = ['host', 'user', 'password', 'database',
-                   'loop', 'thread', 'delay', 'port', 'log', 'browser' , 'display']
+                   'loop', 'thread', 'delay', 'port', 'log', 'browser' , 'display' , 'driver']
         if not all(k in settingDict for k in settings):
             self.exampleSetting()
         if any(k in settingDict for k in options):
@@ -106,6 +106,8 @@ class pySelenium():
                         settingDict['log'] = 'INFO'
                     elif k == 'browser':
                         settingDict['browser'] = 'Chrome'
+                    elif k == 'driver':
+                        settingDict['driver'] = None
                     elif k == 'display':
                         settingDict['display'] = True
                         pass
