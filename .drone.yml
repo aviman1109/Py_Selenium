@@ -10,16 +10,16 @@ depth: 1
 
 steps:
 - name: test
-  image: alpine
+  image: python
   commands:
-    - pwd
-    - ls -al
-
-- name: pack_init
-  image: cdrx/pyinstaller-linux:python3
-  pull: always
-  commands:
+    - pip install -r requirements.txt
     - pyinstaller main.py
+
+# - name: pack_init
+#   image: cdrx/pyinstaller-linux:python3
+#   pull: always
+#   commands:
+#     - pyinstaller main.py
 
 - name: pack_linux
   image: cdrx/pyinstaller-linux:python3
