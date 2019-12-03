@@ -189,6 +189,12 @@ class Test():
         elif command == "pause":
             time.sleep(int(value))
 
+        elif command == "close":
+            try:
+                return self.DRIVE.close()
+            except:
+                pass
+
         elif command == "execute_script":
             try:
                 return self.DRIVE.execute_script(target)
@@ -203,7 +209,6 @@ class Test():
 
         elif command == "returnWindow":
             try:
-                # self.DRIVE.close()
                 return self.DRIVE.switch_to.window(self.driver.window_handles[0])
             except:
                 pass
