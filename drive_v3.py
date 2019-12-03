@@ -189,15 +189,15 @@ class Test():
         elif command == "pause":
             time.sleep(int(value))
 
-        elif command == "newWindow":
+        elif command == "execute_script":
             try:
-                return self.DRIVE.execute_script("window.open()")
+                return self.DRIVE.execute_script(target)
             except:
                 pass
 
         elif command == "swichWindow":
             try:
-                return self.DRIVE.switch_to.window(self.driver.window_handles[1])
+                return self.DRIVE.switch_to.window(self.driver.window_handles[target])
             except:
                 pass
 
