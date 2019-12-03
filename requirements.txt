@@ -12,8 +12,6 @@ DateTime==4.3
 decorator==4.4.0
 defusedxml==0.6.0
 entrypoints==0.3
-Flask==1.1.1
-Flask-RESTful==0.3.7
 importlib-metadata==0.19
 ipykernel==5.1.2
 ipython==7.7.0
@@ -56,7 +54,6 @@ pyparsing==2.4.2
 pyrsistent==0.15.4
 pytest==5.1.1
 python-dateutil==2.8.0
-python-dotenv==0.10.3
 pytz==2019.2
 PyYAML==5.1.2
 pyzmq==18.1.0

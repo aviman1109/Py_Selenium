@@ -10,10 +10,10 @@ depth: 1
 
 steps:
 - name: test
-  image: python
+  image: python:3.7.4
   commands:
     - pip install -r requirements.txt
-    - pyinstaller main.py
+    - pyinstaller -F main.py -n pySelenium_linux
 
 # - name: pack_init
 #   image: cdrx/pyinstaller-linux:python3
