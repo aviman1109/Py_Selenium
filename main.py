@@ -4,7 +4,7 @@ import yaml
 import argparse
 import logging
 import threading
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 import drive_v3
 import time
 # setting = {'loop': 1, 'thread': 1}
