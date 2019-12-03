@@ -24,13 +24,18 @@ steps:
 - name: pack_linux
   image: cdrx/pyinstaller-linux:python3
   pull: always
-    
-- name: list
-  image: alpine
-  commands:
-    - pwd
-    - ls -al
-    - cd ..
-    - pwd
-    - ls -al
+
+- name: pack_windows
+  image: cdrx/pyinstaller-windows:python3
+  pull: always
+
+- name: scp files
+  image: appleboy/drone-scp
+  settings:
+    host: aimsa.qbicloud.com
+    username: ecp
+    password: csii!@#$!QAZ
+    port: 9022
+    target: ~/drone/py_selenium
+    source: /src/dist/*
     
