@@ -197,13 +197,13 @@ class Test():
 
         elif command == "executeScript":
             try:
-                return self.DRIVE.execute_script(target)
+                return self.DRIVE.execute_script(value)
             except:
                 pass
 
         elif command == "swichWindow":
             try:
-                return self.DRIVE.switch_to.window(self.driver.window_handles[target])
+                return self.DRIVE.switch_to.window(self.driver.window_handles[int(value)])
             except:
                 pass
 
