@@ -41,18 +41,31 @@ class Test():
                 self.DataBase = None
             else:
                 self.DataBase.initTable()
+                # self.DataBase.updateTable()
         else:
             self.DataBase = None
             logging.info('You might need a mariaDB!!')
 
 
-        print(setting)
-        if setting['browser'] == 'Chrome':
+        logging.info(setting)
+        if 'Chrome' in setting['browser']:
             chrome_options = webdriver.ChromeOptions()
             chrome_options.add_argument('--no-sandbox')
-            chrome_options.add_argument('--headless')
-            chrome_options.add_argument('--disable-gpu')
-            self.DRIVE = webdriver.Chrome(chrome_options=chrome_options)
+            if setting['display'] == False:
+                chrome_options.add_argument('--headless')
+                chrome_options.add_argument('--disable-gpu')
+            if setting['driver']:
+                self.DRIVE = webdriver.Chrome(chrome_options=chrome_options,executable_path=setting['driver'])
+            else:
+                self.DRIVE = webdriver.Chrome(chrome_options=chrome_options)
+            self.URL = ""
+        if 'IE' in setting['browser']:
+            IE_options = webdriver.IeOptions()
+            IE_options.add_argument('--no-sandbox')
+            if setting['driver']:
+                self.DRIVE = webdriver.Ie(ie_options=IE_options,executable_path=setting['driver'])
+            else:
+                self.DRIVE = webdriver.Ie(ie_options=IE_options)
             self.URL = ""
         else:
             pass

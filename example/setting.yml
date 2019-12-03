@@ -8,3 +8,5 @@ Setting:
   log: INFO
   thread: 2
   loop: 3
+  driver: ./chromedriver
+  display: true

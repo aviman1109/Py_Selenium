@@ -1,0 +1,22 @@
+# workspace:
+#     base: /src
+#     path: py_selenium
+    
+kind: pipeline
+name: default
+
+clone:
+depth: 1
+
+steps:
+- name: test
+  image: alpine
+  commands:
+    - pwd
+    - ls -al
+    
+- name: pack
+  image: cdrx/pyinstaller-linux
+  pull: always
+    
+  

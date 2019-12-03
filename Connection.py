@@ -42,10 +42,15 @@ class MySQL(SqlSetting):
             self.con.execute(SQL)
         return self.con.fetchall()
 
+    def updateTable(self):
+        self.execute("""ALTER TABLE commands ADD comment VARCHAR(255);""")
+
     def initTable(self):
         self.execute("""CREATE TABLE IF NOT EXISTS commands(
-            ID              VARCHAR(255) PRIMARY KEY,
+            
+            ID              VARCHAR(255),
             datetime        DATETIME,
+            comment         VARCHAR(255),
             command         VARCHAR(255),
             target          VARCHAR(255),
             targets         TEXT,
