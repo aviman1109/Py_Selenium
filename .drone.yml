@@ -1,6 +1,6 @@
-# workspace:
-#     base: /src
-#     path: py_selenium
+workspace:
+    base: /src
+    path: py_selenium
     
 kind: pipeline
 name: default
@@ -14,9 +14,23 @@ steps:
   commands:
     - pwd
     - ls -al
-    
-- name: pack
-  image: cdrx/pyinstaller-linux
+
+- name: pack_init
+  image: cdrx/pyinstaller-linux:python3
+  pull: always
+  commands:
+    - pyinstaller main.py -n pySelenium_linux
+
+- name: pack_linux
+  image: cdrx/pyinstaller-linux:python3
   pull: always
     
-  
+- name: list
+  image: alpine
+  commands:
+    - pwd
+    - ls -al
+    - cd ..
+    - pwd
+    - ls -al
+    
