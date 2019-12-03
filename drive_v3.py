@@ -195,7 +195,7 @@ class Test():
             except:
                 pass
 
-        elif command == "execute_script":
+        elif command == "executeScript":
             try:
                 return self.DRIVE.execute_script(target)
             except:
