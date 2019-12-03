@@ -1,6 +1,6 @@
 workspace:
     base: /src
-    path: py_selenium
+    # path: py_selenium
     
 kind: pipeline
 name: default
