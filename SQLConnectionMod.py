@@ -1,10 +1,10 @@
 from pathlib import Path  # python3 only
 import os
 from Connection import SqlSetting
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 
-if os.path.exists('.env'):
-    load_dotenv()
+# if os.path.exists('.env'):
+#     load_dotenv()
 
 class SQLConnection():
     def __init__(self):
