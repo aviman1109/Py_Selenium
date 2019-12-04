@@ -71,7 +71,7 @@ class Test():
             self.URL = ""
         else:
             pass
-        self.DRIVE.set_window_size(1440, 900)
+        self.DRIVE.set_window_size(900, 800)
 
     def infoLogger_func(self, logger, command, startTime, result):
         logger.info('command '+command['command'])
