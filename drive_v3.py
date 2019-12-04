@@ -245,14 +245,16 @@ class Test():
                 self.DRIVE.switch_to.window(
                     self.DRIVE.window_handles[int(value)])
                 # time.sleep(5)
-                while(True):
-                    try:
-                        if self.main_window == self.DRIVE.current_window_handle:
-                            time.sleep(0.1)
-                        else:
-                            break
-                    except:
-                        return traceback.format_exc()
+                WebDriverWait(self.DRIVE, 10).until(
+                    EC.url_changes(target))
+                # while(True):
+                #     try:
+                #         if self.main_window == self.DRIVE.current_window_handle:
+                #             time.sleep(0.1)
+                #         else:
+                #             break
+                #     except:
+                #         return traceback.format_exc()
                 return self.DRIVE.set_window_position(700, 100)
             except:
                 return traceback.format_exc()
