@@ -234,6 +234,7 @@ class Test():
             try:
                 self.main_window = self.DRIVE.current_window_handle
                 self.DRIVE.switch_to.window(self.DRIVE.window_handles[int(value)])
+                time.sleep(5)
                 return self.DRIVE.set_window_position(400,100)
             except:
                 return traceback.format_exc()
