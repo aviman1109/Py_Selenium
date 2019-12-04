@@ -72,6 +72,7 @@ class Test():
         else:
             pass
         self.DRIVE.set_window_size(900, 800)
+        self.DRIVE.set_window_position(0,0)
 
     def infoLogger_func(self, logger, command, startTime, result):
         logger.info('command '+command['command'])
@@ -232,13 +233,15 @@ class Test():
         elif command == "swichWindow":
             try:
                 self.main_window = self.DRIVE.current_window_handle
-                return self.DRIVE.switch_to.window(self.DRIVE.window_handles[int(value)])
+                self.DRIVE.switch_to.window(self.DRIVE.window_handles[int(value)])
+                return self.DRIVE.set_window_position(400,100)
             except:
                 return traceback.format_exc()
 
         elif command == "returnWindow":
             try:
-                return self.DRIVE.switch_to.window(self.main_window)
+                self.DRIVE.switch_to.window(self.main_window)
+                return self.DRIVE.set_window_position(0,0)
             except:
                 return traceback.format_exc()
 
