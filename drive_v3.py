@@ -71,7 +71,7 @@ class Test():
             self.URL = ""
         else:
             pass
-        self.DRIVE.set_window_size(900, 800)
+        self.DRIVE.set_window_size(700, 800)
         self.DRIVE.set_window_position(0,0)
 
     def infoLogger_func(self, logger, command, startTime, result):
@@ -215,27 +215,27 @@ class Test():
             except:
                 return traceback.format_exc()
 
-        elif command == "executeSwich":
-            print("qqqqqqq")
-            print(self.DRIVE.window_handles)
-            try:
-                self.main_window = self.DRIVE.current_window_handle()
-                self.DRIVE.execute_script(
-                    "window.open('http://www.twitter.com', 'new window')")
-                window_after = self.DRIVE.window_handles[1]
-                self.DRIVE.switch_to.window(window_after)
-                time.sleep(10)
-                self.DRIVE.get("https://www.google.com")
-                self.DRIVE.switch_to.window(window_after)
-            except:
-                return traceback.format_exc()
+        # elif command == "executeSwich":
+        #     print("qqqqqqq")
+        #     print(self.DRIVE.window_handles)
+        #     try:
+        #         self.main_window = self.DRIVE.current_window_handle()
+        #         self.DRIVE.execute_script(
+        #             "window.open('http://www.twitter.com', 'new window')")
+        #         window_after = self.DRIVE.window_handles[1]
+        #         self.DRIVE.switch_to.window(window_after)
+        #         time.sleep(10)
+        #         self.DRIVE.get("https://www.google.com")
+        #         self.DRIVE.switch_to.window(window_after)
+        #     except:
+        #         return traceback.format_exc()
 
         elif command == "swichWindow":
             try:
                 self.main_window = self.DRIVE.current_window_handle
                 self.DRIVE.switch_to.window(self.DRIVE.window_handles[int(value)])
                 time.sleep(5)
-                return self.DRIVE.set_window_position(400,100)
+                return self.DRIVE.set_window_position(700,100)
             except:
                 return traceback.format_exc()
 
