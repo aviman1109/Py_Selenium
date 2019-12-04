@@ -137,12 +137,16 @@ class Test():
                     self.infoLogger_func(
                         readlogger, command, startTime, result)
                 except:
+                    self.capture_window(ImgName=datetime.now().strftime(
+                        "screenshots/error%Y%m%d_%H%M%S.%f.png"))
                     readlogger.error('command '+command['command'])
                     readlogger.error('id '+command['id'])
                     readlogger.error('target '+command['target'])
                     readlogger.error(
                         'This is FUCKING error!!\n'+traceback.format_exc())
                     return None
+                self.capture_window(ImgName=datetime.now().strftime(
+                    "screenshots/%Y%m%d_%H%M%S.%f.png"))
             self.capture_window(ImgName=datetime.now().strftime(
                 "screenshots/%Y%m%d_%H%M%S.%f.png"))
 
