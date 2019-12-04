@@ -72,7 +72,7 @@ class Test():
         else:
             pass
         self.DRIVE.set_window_size(700, 800)
-        self.DRIVE.set_window_position(0,0)
+        self.DRIVE.set_window_position(0, 0)
 
     def infoLogger_func(self, logger, command, startTime, result):
         logger.info('command '+command['command'])
@@ -215,7 +215,11 @@ class Test():
 
         elif command == "executeScript":
             try:
-                return self.DRIVE.execute_script(value)
+                if "open" in value:
+                    self.DRIVE.execute_script(value)
+                    return WebDriverWait(self.DRIVE, 10).until(EC.new_window_is_opened)
+                else:
+                    return self.DRIVE.execute_script(value)
             except:
                 return traceback.format_exc()
 
@@ -237,16 +241,19 @@ class Test():
         elif command == "swichWindow":
             try:
                 self.main_window = self.DRIVE.current_window_handle
-                self.DRIVE.switch_to.window(self.DRIVE.window_handles[int(value)])
-                time.sleep(5)
-                return self.DRIVE.set_window_position(700,100)
+                self.DRIVE.switch_to.window(
+                    self.DRIVE.window_handles[int(value)])
+                # time.sleep(5)
+                WebDriverWait(self.DRIVE, 10).until(
+                    EC.title_contains(target))
+                return self.DRIVE.set_window_position(700, 100)
             except:
                 return traceback.format_exc()
 
         elif command == "returnWindow":
             try:
                 self.DRIVE.switch_to.window(self.main_window)
-                return self.DRIVE.set_window_position(0,0)
+                return self.DRIVE.set_window_position(0, 0)
             except:
                 return traceback.format_exc()
 
