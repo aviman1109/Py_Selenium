@@ -241,11 +241,18 @@ class Test():
         elif command == "swichWindow":
             try:
                 self.main_window = self.DRIVE.current_window_handle
+                self.DRIVE.get
                 self.DRIVE.switch_to.window(
                     self.DRIVE.window_handles[int(value)])
                 # time.sleep(5)
-                WebDriverWait(self.DRIVE, 10).until(
-                    EC.title_contains(target))
+                while(True):
+                    try:
+                        if self.main_window == self.DRIVE.current_window_handle:
+                            time.sleep(0.1)
+                        else:
+                            break
+                    except:
+                        return traceback.format_exc()
                 return self.DRIVE.set_window_position(700, 100)
             except:
                 return traceback.format_exc()
